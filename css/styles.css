@@ -191,8 +191,12 @@ a.custom-card:hover {
   color: orange;
 }
 
-.p{
-  display: flex;
-  justify-content: flex-start;
-  justify-content: space-between;
+.session{
+justify-content: center;
+text-align: center;
+}
+
+.form-floating{
+  display: inline-block;
+  width: 50%;
 }
