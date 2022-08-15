@@ -117,7 +117,9 @@ footer p {
 }
 
 .left {
-  float: left;
+  float: left;      <div class="alert alert-danger text-center" role="alert">
+  <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+</div>
   padding: 4px;
   background-color: rgba(255, 255, 255, 0.5);
 }
@@ -187,4 +189,10 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+.p{
+  display: flex;
+  justify-content: flex-start;
+  justify-content: space-between;
 }
