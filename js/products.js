@@ -59,7 +59,8 @@ fetch (url.concat(localStorage.getItem("catID"))+".json")
             if (e.target.matches("#search")){
                 for (let i = 0; i < data.products.length; i++) {
                     const element = data.products[i];
-                   var products = data.products.filter((element)=>element.name.toLowerCase().includes(e.target.value.toLowerCase())) 
+                    var products = data.products.filter((element)=>element.name.toLowerCase().includes(e.target.value.toLowerCase()) | element.description.toLowerCase().includes(e.target.value.toLowerCase()));  
+                   
                 }
             showPage(products);
             }
@@ -131,16 +132,3 @@ function sortCategories(criteria, array){
     }
     return result;
 }
-
-document.addEventListener("keyup",e=>{
-    e.target.matches("#search");
-/*    if (e.target("#search")){
-        document.querySelectorAll("name").forEach(product=>{
-            product.textContent.toLowerCase().includes(e.target.value.toLowerCase()
-)?product.classList.remove("filtro")
-:product.classList.add("filtro")
-        });
-    };
-*/
-
-});
