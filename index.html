@@ -5,7 +5,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-  <meta name="google-signin-client_id" content="326512651472-g489b1tr52480pg5vp47h2ervsiufa5d.apps.googleusercontent.com">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -38,7 +37,7 @@
         <br>
         <br>
         <button id="btn" class=" btn btn-lg btn-primary" type="submit">Ingresar</button>
-        <div id="google" class="btn btn-lg  g-signin2" data-onsuccess="onSignIn"></div>
+        <button onclick="loginWithGoogle()" class="btn btn-lg btn-primary" type="submit">Ingresar con Google</button>
     </div>
   </main>
   <footer class="text-muted">
@@ -51,8 +50,55 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+  <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+  <script type="text/javascript">
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyB19FmYzjf4sVrpONNuObQTRT_86g7-cY8",
+      authDomain: "fir-d6a19.firebaseapp.com",
+      projectId: "fir-d6a19",
+      storageBucket: "fir-d6a19.appspot.com",
+      messagingSenderId: "296209291197",
+      appId: "1:296209291197:web:b3a12c0943a1dd5f2f24d4"
+    };
+  
+    // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script type="text/javascript">
+    var loginWithGoogle = function(){
+
+var provider = new firebase.auth.GoogleAuthProvider();
+firebase.auth().signInWithPopup(provider).then(function(result) {
+// This gives you a Google Access Token. You can use it to access the Google API.
+var token = result.credential.accessToken;
+// The signed-in user info.
+var user = result.user;
+
+console.log(user);
+localStorage.setItem("user",user.email);
+    localStorage.setItem("userIMG",user.photoURL);
+    window.location.replace("principal.html");
+// ...
+}).catch(function(error) {
+// Handle Errors here.
+var errorCode = error.code;
+var errorMessage = error.message;
+// The email of the user's account used.
+var email = error.email;
+// The firebase.auth.AuthCredential type that was used.
+var credential = error.credential;
+// ...
+
+console.log(errorMessage);
+});
+}
+  </script>
   <script src="js/login.js"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 
 </html>

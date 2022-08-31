@@ -7,9 +7,15 @@ document.getElementById("btn").addEventListener("click",()=>{
     }
 });
 
-function onSignIn(googleUser) {
+/*function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile(); 
     localStorage.setItem("user",profile.getEmail());
     localStorage.setItem("userIMG",profile.getImageUrl());
     window.location.replace("principal.html");
-    }
+    }*/
+
+
+ 
+
+
+
