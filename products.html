@@ -32,16 +32,52 @@
           </li>
           <li class="nav-item">
           </li>
+          <li class = "nav-item">
+            <a class="nav-link active" href="my-profile.html" id="user"></a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
   <main class="pb-5 container">
-    <div class="text-center p-4">
-    <h2>Productos</h2>
-    <p class="lead">Verás aquí todos los productos de la categoría autos</p>      
+    <div class="text-center p-4" id="title">
     </div>
-
+    <div class="row">
+        <div class="col text-end">
+          <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+            <input type="radio" class="btn-check" name="options" id="sortUp" >
+            <label class="btn btn-light" for="sortUp"><i class="fas fa-sort-numeric-up mr-1"></i></label>
+            <input type="radio" class="btn-check" name="options" id="sortDown" >
+            <label class="btn btn-light" for="sortDown"><i class="fas fa-sort-numeric-down mr-1"></i></label>
+            <input type="radio" class="btn-check" name="options" id="rating" >
+            <label class="btn btn-light" for="rating"><i class="fas fa-sort-amount-down mr-1"></i></label>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+        <div class="row container p-0 m-0">
+          <div class="col">
+            <input type="search" name="search" id="search" placeholder="Buscar">
+          </div>
+          <div class="col">
+            <p class="font-weight-normal text-end my-2">Precio:</p>
+          </div>
+          <div class="col">
+            <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+          </div>
+          <div class="col">
+            <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+          </div>
+          <div class="col-3 p-0">
+            <div class="btn-group" role="group">
+              <button class="btn btn-light btn-block" id="rangeFilterCostProducts">Filtrar</button>
+              <button class="btn btn-link btn-sm" id="clearCostFilter">Limpiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container" id="product-c">
     </div>
   </main>
@@ -66,6 +102,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
+  <script src="js/user.js"></script>
 </body>
 
 </html>
