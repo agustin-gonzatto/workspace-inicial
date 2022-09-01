@@ -10,6 +10,7 @@ document.getElementById("btn").addEventListener("click", () => {
     }
 });
 
+// Inicio con google
 var firebaseConfig = {
     apiKey: "AIzaSyB19FmYzjf4sVrpONNuObQTRT_86g7-cY8",
     authDomain: "fir-d6a19.firebaseapp.com",
