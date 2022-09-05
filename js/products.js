@@ -4,6 +4,7 @@ const UP = "up";
 const RATING = "rating";
 let minCost = undefined;
 let maxCost = undefined;
+let productos = document.getElementsByClassName("list-group-item");
 
 fetch (url.concat(localStorage.getItem("catID"))+".json")
     .then (res => res.json())
@@ -68,6 +69,13 @@ fetch (url.concat(localStorage.getItem("catID"))+".json")
         
         });
 
+        for (let i = 0; i < productos.length; i++) {
+            productos[i].addEventListener("click", () => {
+                window.location.href = "./product-info.html";
+                localStorage.setItem("id",data.products[i].id);
+            });
+        }
+
     }); 
 
 function showPage(data){
@@ -94,6 +102,8 @@ function showPage(data){
         }   
     } 
 };
+
+
 
 
 
