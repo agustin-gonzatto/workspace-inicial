@@ -23,7 +23,7 @@ function showPageProduct(data) {
     `;
     data.images.forEach(element => {
         document.getElementById("contenedorIMG").innerHTML += `
-        <img src="/${element}" width=${100/data.images.length}%>
+        <img src="./${element}" width=${100/data.images.length}%>
         `
     });
 };
