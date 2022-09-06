@@ -205,3 +205,14 @@ text-align: center;
   display: flex;
   justify-content: space-between;
 }
+
+.fa{
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.comment:hover,
+.comment:hover ~ .comment{
+  color: orange;
+}
+

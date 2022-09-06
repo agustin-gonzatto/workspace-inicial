@@ -1,6 +1,8 @@
 let url = "https://japceibal.github.io/emercado-api/products/";
 let id = localStorage.getItem("id");
 let producto = {};
+let comentario = [];
+let comment = {};
 
 function showPageProduct(data) {
     document.getElementById("contenedor").innerHTML += `
@@ -18,34 +20,35 @@ function showPageProduct(data) {
         </div>
         <div id="contenedorIMG">
         </div>
-        <div id="comentarios">
-        </div>
+        
     `;
-    data.images.forEach(element => {
+    data.images.forEach((element) => {
         document.getElementById("contenedorIMG").innerHTML += `
-        <img src="./${element}" width=${100/data.images.length}%>
-        `
+        <img src="./${element}" width=${100 / data.images.length}%>
+        `;
     });
-};
+}
 
 function showComments(data) {
-    document.getElementById("comentarios").innerHTML += `
-        <div>
-            <h4>Comentarios:</h4>
-        </div>
-        <div id="comments"></div>
-        `;
-    data.forEach(element => {
+    data.forEach((element) => {
         document.getElementById("comments").innerHTML += `
             <h6><b>${element.user}: </b>${element.description} - ${element.dateTime}</h6>
-            <p>Puntuacion:  ${element.score}/5 </p>
-            <br>
             `;
+        for (let i = 0; i < element.score; i++) {
+            document.getElementById("comments").innerHTML += `
+            <span class="fa fa-star checked"></span>
+            `;
+        }
+        for (let i = 0; i < 5 - element.score; i++) {
+            document.getElementById("comments").innerHTML += `
+            <span class="fa fa-star"></span>
+            `;
+        }
+        document.getElementById("comments").innerHTML += `<br><br>`
     });
-        
-    
+}
 
-};
+
 
 fetch(url.concat(localStorage.getItem("id")) + ".json")
     .then((res) => res.json())
@@ -57,5 +60,33 @@ fetch(`https://japceibal.github.io/emercado-api/products_comments/${id}.json`)
     .then((res) => res.json())
     .then((data) => {
         console.log(data);
-        showComments(data); 
+        showComments(data);
     });
+
+document.getElementById("commentBtn").addEventListener("click", () => {
+    let score;
+
+    for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
+        if (document.getElementsByClassName("comment")[i].classList.contains("checked")) {
+            score = 5- i ;
+        }
+    }
+    let fecha = new Date();
+    comment = {
+        user: localStorage.getItem("user"),
+        description: document.getElementById("comment").value,
+        dateTime: fecha.toLocaleString("sv-SE"),
+        score: score,
+    };
+    comentario.push(comment);
+    showComments(comentario);
+    comentario = [];
+    for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
+        if (document.getElementsByClassName("comment")[i].classList.contains("checked")) {
+            document.getElementsByClassName("comment")[i].classList.remove("checked");
+        }
+    }
+    document.getElementById("comment").value = "";
+    score = 0;
+
+});
