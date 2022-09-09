@@ -216,3 +216,27 @@ text-align: center;
   color: orange;
 }
 
+.smallIMG img{
+    border: 2px solid black;
+    padding: 10px;
+}
+.smallIMG{
+  width:  auto;
+  display: flex;
+  
+}
+#contenedorIMG{
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  padding: 10px;
+}
+
+.containerIMG{
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  width: 100%;
+}
+
