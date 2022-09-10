@@ -6,59 +6,57 @@ let comment = {};
 
 function showPageProduct(data) {
     document.getElementById("contenedor").innerHTML += `
-            <br><h2>${data.name}</h2><br>
-            <div>
+        <br />
+        <h2>${data.name}</h2>
+        <br />
+        <div>
             <div class="containerIMG">
                 <div class="IMGgrande">
-                    <img id="bigIMG" src="${data.images[0]}">
+                    <img id="bigIMG" src="${data.images[0]}" />
                 </div>
-                <div id="contenedorIMG">
-                </div>
+                <div id="contenedorIMG"></div>
             </div>
             <div>
-            <h4>Precio:</h4>
-            <h6>${data.cost} ${data.currency}</h6><br>
-            <h4>Descipcion:</h4>
-            <h6>${data.description}</h6><br>
-            <h4>Categoria:</h4>
-            <h6>${data.category}</h6><br>
-            <h4>Cantidad vendidos:</h4>
-            <h6>${data.soldCount}</h6><br>
-            <hr>
+                <h4>Precio:</h4>
+                <h6>${data.cost} ${data.currency}</h6>
+                <br />
+                <h4>Descipcion:</h4>
+                <h6>${data.description}</h6>
+                <br />
+                <h4>Categoria:</h4>
+                <h6>${data.category}</h6>
+                <br />
+                <h4>Cantidad vendidos:</h4>
+                <h6>${data.soldCount}</h6>
+                <br />
+                <hr />
             </div>
-            </div>
-            
-            
-       
-            
-        
-    `;
+        </div> `;
     data.images.forEach((element) => {
         document.getElementById("contenedorIMG").innerHTML += `
-        <img class="smallIMG" src="./${element}" width=${100 / data.images.length}% >
-        `;
+        <img class="smallIMG" src="./${element}" width=${100 / data.images.length}% >`;
     });
 }
 
 function showComments(data) {
     data.forEach((element) => {
         document.getElementById("comments").innerHTML += `
-            <h6><b>${element.user}: </b>${element.description} - </h6>
-            `;
+            <h6><b>${element.user}: </b>${element.description} - </h6> `;
         for (let i = 0; i < element.score; i++) {
             document.getElementById("comments").innerHTML += `
-            <span class="fa fa-star checked"></span>
-            `;
+            <span class="fa fa-star checked"></span>`;
         }
         for (let i = 0; i < 5 - element.score; i++) {
             document.getElementById("comments").innerHTML += `
-            <span class="fa fa-star"></span>
-            `;
+            <span class="fa fa-star"></span>`;
         }
-        document.getElementById("comments").innerHTML += `<p class="text-muted">${element.dateTime}<p>
+        document.getElementById("comments").innerHTML += `
+        <p class="text-muted">${element.dateTime}<p>
         <br>`;
     });
 }
+
+//Solicito los Json del producto y comentarios, los muestro y agrego escuchas.
 
 fetch(url.concat(localStorage.getItem("id")) + ".json")
     .then((res) => res.json())
@@ -103,12 +101,3 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
             score = 0;
         });
     });
-
-/*
-        document.getElementsByClassName("smallIMG").forEach(element => {
-            element.addEventListener("click", () => {
-                console.log("hola")
-                document.getElementById("bigIMG").src = element.src;
-            })
-            
-        });*/
