@@ -66,38 +66,51 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
             .then((data) => {
                 showPageProduct(data1);
                 showComments(data);
-            })
-            .then(() => {
-                console.log(document.getElementsByClassName("smallIMG").length);
                 for (let i = 0; i < document.getElementsByClassName("smallIMG").length; i++) {
-                    document.getElementsByClassName("smallIMG")[i].addEventListener("click", () => {
+                    document.getElementsByClassName("smallIMG")[i].addEventListener("mouseover", () => {
                         document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[i].src;
                     });
                 }
+                //Al presionar estrella
+
+                for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
+                    document.getElementsByClassName("comment")[i].addEventListener("click", () => {
+                        let j = 0;
+                        for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
+                            document.getElementsByClassName("comment")[i].classList.remove("checked");
+                        }
+                        document.getElementsByClassName("comment")[i].classList.add("checked");
+                        j = i;
+                        for (let i = 4; i > j; i--) {
+                            document.getElementsByClassName("comment")[i].className += " checked";
+                        }
+                    });
+                }
+
+                //Al presionar enviar
+                document.getElementById("commentBtn").addEventListener("click", () => {
+                    if (document.getElementsByClassName("comment checked").length == 0 || document.getElementById("comment").value == "") {
+                        alert("Comentario incompleto");
+                    } else {
+                        let score = document.getElementsByClassName("comment checked").length;
+                        let fecha = new Date();
+                        comment = {
+                            user: localStorage.getItem("user"),
+                            description: document.getElementById("comment").value,
+                            dateTime: fecha.toLocaleString("sv-SE"),
+                            score: score,
+                        };
+                        comentario.push(comment);
+                        showComments(comentario);
+                        comentario = [];
+                        for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
+                            if (document.getElementsByClassName("comment")[i].classList.contains("checked")) {
+                                document.getElementsByClassName("comment")[i].classList.remove("checked");
+                            }
+                        }
+                        document.getElementById("comment").value = "";
+                        score = 0;
+                    }
+                });
             });
-        document.getElementById("commentBtn").addEventListener("click", () => {
-            let score;
-            for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
-                if (document.getElementsByClassName("comment")[i].classList.contains("checked")) {
-                    score = 5 - i;
-                }
-            }
-            let fecha = new Date();
-            comment = {
-                user: localStorage.getItem("user"),
-                description: document.getElementById("comment").value,
-                dateTime: fecha.toLocaleString("sv-SE"),
-                score: score,
-            };
-            comentario.push(comment);
-            showComments(comentario);
-            comentario = [];
-            for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
-                if (document.getElementsByClassName("comment")[i].classList.contains("checked")) {
-                    document.getElementsByClassName("comment")[i].classList.remove("checked");
-                }
-            }
-            document.getElementById("comment").value = "";
-            score = 0;
-        });
     });
