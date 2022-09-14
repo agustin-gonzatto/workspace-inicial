@@ -34,7 +34,7 @@ function showPageProduct(data) {
         </div> `;
     data.images.forEach((element) => {
         document.getElementById("contenedorIMG").innerHTML += `
-        <img class="smallIMG" src="./${element}" width=${100 / data.images.length}% >`;
+        <img class="smallIMG" src="./${element}" width=100% >`;
     });
 }
 
@@ -72,7 +72,6 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
                     });
                 }
                 //Al presionar estrella
-
                 for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
                     document.getElementsByClassName("comment")[i].addEventListener("click", () => {
                         let j = 0;
