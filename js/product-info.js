@@ -111,5 +111,26 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
                         score = 0;
                     }
                 });
+
+                //Recomendados
+                data1.relatedProducts.forEach((element) => {
+                    document.getElementById("recomendados").innerHTML += `
+                     <div class="card card-click col-md-3" style="cursor:pointer;">
+                        <img src="${element.image}" alt="" class="card-img-top" style="; width: 100%;">
+                    <div class="card-body">
+                    <h6 class="card-text">${element.name}</h6>
+                    </div>
+                    </div>
+                    `;
+                });
+
+                //Guardar y redireccinar
+
+                for (let i = 0; i < document.getElementsByClassName("card-click").length; i++) {
+                    document.getElementsByClassName("card-click")[i].addEventListener("click", () => {
+                        localStorage.setItem("id", data1.relatedProducts[i].id);
+                        window.location.href = "./product-info.html";
+                    });
+                }
             });
     });
