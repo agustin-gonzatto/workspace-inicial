@@ -81,7 +81,7 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
                     });
                 }
 
-                //Carusel
+                //Carrusel
                 document.getElementsByClassName("carousel-control-prev")[0].addEventListener("click", () => {
                     let index = document.getElementById("bigIMG").src.split("_")[1];
                     let i = parseInt(index.substring(0, index.length - 4));
@@ -100,7 +100,7 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
                         document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[0].src;
                     }
                 });
-                
+
                 //Al presionar estrella
                 for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
                     document.getElementsByClassName("comment")[i].addEventListener("click", () => {
