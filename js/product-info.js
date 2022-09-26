@@ -11,8 +11,16 @@ function showPageProduct(data) {
         <br />
         <div>
             <div class="containerIMG">
-                <div class="IMGgrande">
+                <div class="IMGgrande carousel slide">
                     <img id="bigIMG" src="${data.images[0]}" />
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
                 <div id="contenedorIMG"></div>
             </div>
@@ -66,11 +74,33 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
             .then((data) => {
                 showPageProduct(data1);
                 showComments(data);
+                //Al pasar sobre la imagen
                 for (let i = 0; i < document.getElementsByClassName("smallIMG").length; i++) {
                     document.getElementsByClassName("smallIMG")[i].addEventListener("mouseover", () => {
                         document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[i].src;
                     });
                 }
+
+                //Carusel
+                document.getElementsByClassName("carousel-control-prev")[0].addEventListener("click", () => {
+                    let index = document.getElementById("bigIMG").src.split("_")[1];
+                    let i = parseInt(index.substring(0, index.length - 4));
+                    if (i > 1) {
+                        document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[i - 2].src;
+                    } else {
+                        document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[data1.images.length - 1].src;
+                    }
+                });
+                document.getElementsByClassName("carousel-control-next")[0].addEventListener("click", () => {
+                    let index = document.getElementById("bigIMG").src.split("_")[1];
+                    let i = parseInt(index.substring(0, index.length - 4));
+                    if (i < data1.images.length) {
+                        document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[i].src;
+                    } else {
+                        document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[0].src;
+                    }
+                });
+                
                 //Al presionar estrella
                 for (let i = 0; i < document.getElementsByClassName("comment").length; i++) {
                     document.getElementsByClassName("comment")[i].addEventListener("click", () => {
@@ -115,7 +145,7 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
                 //Recomendados
                 data1.relatedProducts.forEach((element) => {
                     document.getElementById("recomendados").innerHTML += `
-                     <div class="card card-click col-md-3" style="cursor:pointer;">
+                     <div class="card card-click col-sm-3" style="cursor:pointer;">
                         <img src="${element.image}" alt="" class="card-img-top" style="; width: 100%;">
                     <div class="card-body">
                     <h6 class="card-text">${element.name}</h6>
@@ -125,7 +155,6 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
                 });
 
                 //Guardar y redireccinar
-
                 for (let i = 0; i < document.getElementsByClassName("card-click").length; i++) {
                     document.getElementsByClassName("card-click")[i].addEventListener("click", () => {
                         localStorage.setItem("id", data1.relatedProducts[i].id);
