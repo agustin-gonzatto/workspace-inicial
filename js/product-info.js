@@ -172,7 +172,7 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
 
                 //Comprar
                 document.getElementById("comprar").addEventListener("click", () => {
-                   JSON.parse(localStorage.getItem("compar")).user = localStorage.getItem("user");
+                   let comprar = JSON.parse(localStorage.getItem("comprar"))
                         comprar.articles.push({
                                 id: localStorage.getItem("id"),
                                 name: data1.name,

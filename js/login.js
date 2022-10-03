@@ -1,9 +1,18 @@
+
+
 document.getElementById("btn").addEventListener("click", () => {
+    let comprar = {
+        user: document.getElementById("floatingInput").value,
+        articles:[]
+    };
+    localStorage.setItem("comprar", JSON.stringify(comprar));
     if (
         document.getElementById("floatingPassword").value.length > 0 &&
         document.getElementById("floatingInput").value.length > 0
     ) {
         localStorage.setItem("user", document.getElementById("floatingInput").value);
+
+        
         window.location.replace("principal.html");
     } else {
         alert("Debe ingresar los datos correctamente.");
@@ -33,8 +42,11 @@ var loginWithGoogle = function () {
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user;
-
-            console.log(user);
+            let comprar = {
+                user: user.email,
+                articles: [],
+            };
+            localStorage.setItem("comprar", JSON.stringify(comprar));
             localStorage.setItem("user", user.email);
             localStorage.setItem("userIMG", user.photoURL);
             window.location.replace("principal.html");

@@ -4,12 +4,12 @@ let cost = 1;
 fetch(`https://japceibal.github.io/emercado-api/user_cart/${user_c}.json`)
     .then((response) => response.json())
     .then((data) => {
+        data.articles = data.articles.concat(JSON.parse(localStorage.getItem("comprar")).articles);
         showCart(data);
-        showCartLocal(JSON.parse(localStorage.getItem("comprar")))
     });
 
 function showCart(data) {
-    document.getElementById("cart").innerHTML += `
+    document.getElementById("cart").innerHTML = `
     <table class="table">
         <thead>
             <tr>
@@ -27,31 +27,15 @@ function showCart(data) {
                 <th scope="row"><img src="${data.articles[i].image}" style="max-width:150px; min-width:100px;"></img></th>
                 <td>${data.articles[i].name}</td>
                 <td>${data.articles[i].unitCost} ${data.articles[i].currency}</td>
-                <td><input id="cont" type="number" name="number" min="1" value="${data.articles[i].count}"></td>
-                <td id="cost">${data.articles[i].unitCost * data.articles[i].count} ${data.articles[i].currency}</td>
+                <td><input class="cont" type="number" name="number" min="1" value="${data.articles[i].count}"></td>
+                <td class="cost">${data.articles[i].unitCost * data.articles[i].count} ${data.articles[i].currency}</td>
             </tr>`;
-        document.getElementById("cont").addEventListener("click", () => {
-            document.getElementById("cost").innerHTML = `
-                ${document.getElementById("cont").value * data.articles[i].unitCost}  ${data.articles[i].currency}
-            `;
-        });
-    }
-}
 
-function showCartLocal(data) {
-    for (let i = 0; i < data.articles.length; i++) {
-        document.getElementById("prods").innerHTML += `
-            <tr>
-                <th scope="row"><img src="${data.articles[i].image}" style="max-width:150px; min-width:100px;"></img></th>
-                <td>${data.articles[i].name}</td>
-                <td>${data.articles[i].unitCost} ${data.articles[i].currency}</td>
-                <td><input id="cont" type="number" name="number" min="1" value="${data.articles[i].count}"></td>
-                <td id="cost">${data.articles[i].unitCost * data.articles[i].count} ${data.articles[i].currency}</td>
-            </tr>`;
-        document.getElementById("cont").addEventListener("click", () => {
-            document.getElementById("cost").innerHTML = `
-                ${document.getElementById("cont").value * data.articles[i].unitCost}  ${data.articles[i].currency}
-            `;
-        });
+    }
+    for (let i = 0; i < document.getElementsByClassName("cont").length; i++) {
+            document.getElementsByClassName("cont")[i].addEventListener("click", () => {
+                document.getElementsByClassName("cost")[i].innerHTML = `${data.articles[i].unitCost * document.getElementsByClassName("cont")[i].value} ${data.articles[i].currency}`;
+            })
+            
     }
 }
