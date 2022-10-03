@@ -3,12 +3,20 @@ let id = localStorage.getItem("id");
 let producto = {};
 let comentario = [];
 let comment = {};
+let comprar = {
+    user: localStorage.getItem("user"),
+    articles: [
+        {},
+    ],
+};
 
 function showPageProduct(data) {
     document.getElementById("contenedor").innerHTML += `
         <br />
-        <h2>${data.name}</h2>
-        <br />
+        <div style="display:flex;justify-content:space-between ;">
+            <h2>${data.name}</h2><button class="btn btn-primary" id="comprar">Comprar</button>
+            
+        </div>
         <div>
             <div class="containerIMG">
                 <div class="IMGgrande carousel slide">
@@ -161,5 +169,20 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
                         window.location.href = "./product-info.html";
                     });
                 }
+
+                //Comprar
+                document.getElementById("comprar").addEventListener("click", () => {
+                   JSON.parse(localStorage.getItem("compar")).user = localStorage.getItem("user");
+                        comprar.articles.push({
+                                id: localStorage.getItem("id"),
+                                name: data1.name,
+                                count: 1,
+                                unitCost: data1.cost,
+                                currency: data1.currency,
+                                image:data1.images[0]
+                            })
+                            
+                    localStorage.setItem("comprar",JSON.stringify(comprar))
+                })
             });
     });
