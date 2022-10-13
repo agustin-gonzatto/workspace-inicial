@@ -184,10 +184,6 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
           } else {
             alert("Ya ingreso este producto al carrito")
           }
-          
-          
-
-          
         });
       });
   });
