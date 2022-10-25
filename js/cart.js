@@ -1,11 +1,22 @@
 let user_c = 25801;
 let cost = 1;
+let artCost = [];
+let articles=[];
 
 fetch(`https://japceibal.github.io/emercado-api/user_cart/${user_c}.json`)
   .then((response) => response.json())
   .then((data) => {
-    data.articles = data.articles.concat(JSON.parse(localStorage.getItem("comprar")).articles);
-    showCart(data);
+    let cart = JSON.parse(localStorage.getItem("comprar"));
+    if (cart.articles.find(arr => arr.id === data.articles[0].id)){
+      showCart(cart.articles)
+  }
+    else {
+      cart.articles = data.articles.concat(cart.articles);
+      localStorage.setItem("comprar", JSON.stringify(cart))
+      showCart(cart.articles)
+    }
+    articles = cart.articles;
+    
     metododepago();
     validar();
   });
@@ -20,31 +31,35 @@ function showCart(data) {
                 <th scope="col">Costo</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Subtotal</th>
+                <th scope="col"></th>
             </tr>
         </thead>
   <tbody id="prods"></tbody>`;
 
-  for (let i = 0; i < data.articles.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     document.getElementById("prods").innerHTML += `
             <tr>
-                <th scope="row"><img src="${data.articles[i].image}" style="max-width:150px; min-width:100px;"></img></th>
-                <td>${data.articles[i].name}</td>
-                <td>${data.articles[i].currency} ${data.articles[i].unitCost}</td>
-                <td><input class="cont" type="number" name="number" min="1" value="${data.articles[i].count}"></td>
-                <td class="cost" >${data.articles[i].currency} ${data.articles[i].unitCost * data.articles[i].count}</td>
+                <td  scope="row"><img src="${data[i].image}" style="max-width:150px; min-width:100px;"></img></td>
+                <td >${data[i].name}</td>
+                <td >${data[i].currency} ${data[i].unitCost}</td>
+                <td ><input class="cont" type="number" name="number" min="1" value="${data[i].count}"></td>
+                <td class="cost" >${data[i].currency} ${data[i].unitCost * data[i].count}</td>
+                <td><i role="button" id="${data[i].id}" class="fa fa-trash"></i></td>
             </tr>`;
-    costos(document.querySelectorAll(".cost"));
+    data[i].currency === "USD" ? artCost.push(data[i].unitCost) : artCost.push(Math.round(data[i].unitCost / 41));
+    costos(artCost);
   }
 
   for (let i = 0; i < document.getElementsByClassName("cont").length; i++) {
     document.getElementsByClassName("cont")[i].addEventListener("click", () => {
-      document.getElementsByClassName("cost")[i].innerHTML = `${data.articles[i].currency} ${data.articles[i].unitCost * document.getElementsByClassName("cont")[i].value} `;
-      costos(document.querySelectorAll(".cost"));
+      document.getElementsByClassName("cost")[i].innerHTML = `${data[i].currency} ${data[i].unitCost * document.getElementsByClassName("cont")[i].value} `;
+      costos(artCost);
     });
   }
   document.getElementsByTagName("fieldset")[0].addEventListener("click", () => {
-    costos(document.querySelectorAll(".cost"));
+    costos(artCost);
   });
+  remover();
 }
 
 function costos(arr) {
@@ -53,7 +68,7 @@ function costos(arr) {
 
   //SubTotal
   for (let i = 0; i < arr.length; i++) {
-    subtotal += parseInt(arr[i].textContent.match(/(\d+)/g)[0]);
+    subtotal += arr[i];
     document.getElementById("subtotal").innerHTML = `USD ${subtotal}`;
   }
 
@@ -89,22 +104,41 @@ function metododepago() {
 }
 
 function validar() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll(".needs-validation");
+  var forms = document.querySelectorAll(".needs-validation");
+  Array.prototype.slice.call(forms).forEach(function (form) {
+    form.addEventListener(
+      "submit",
+      function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
 
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms).forEach(function (form) {
-      form.addEventListener(
-        "submit",
-        function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
+        form.classList.add("was-validated");
+      },
+      false
+    )
+    form.addEventListener("submit", (event) => {
+      if (form.checkValidity()) {
+        document.getElementById("alertcompra").classList.remove("visually-hidden");
+        event.preventDefault();
+        event.stopPropagation();
+        }
+      });
+    
+  });
+}
 
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
+function remover() {
+  document.getElementsByTagName("table")[0].addEventListener("click", (e) => {
+    if (e.target.localName === "i") {
+      artCost = [];
+      articles=articles.filter(art => art.id !== e.target.id);
+      showCart(articles)
+      let art = JSON.parse(localStorage.getItem("comprar"));
+      art.articles = articles;
+      localStorage.setItem("comprar", JSON.stringify(art));
+      
+    } 
+  })
 }

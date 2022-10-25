@@ -51,6 +51,7 @@
       <div id="cart"></div>
     </div>
     <div class="container">
+
       <form class="needs-validation" novalidate>
         <fieldset>
           <h3>Tipos de envio</h3>
@@ -65,11 +66,11 @@
           <div class="form-check">
             <input class="envio form-check-input" type="radio" id="12a15" name="envio" value="0.05" required />
             <label class="form-label" for="12a15">Standar 12 a 15 días (5%)</label>
-          <div class="invalid-feedback">
-            Seleccione método de envio
+            <div class="invalid-feedback">
+              Seleccione método de envio
+            </div>
           </div>
-        </div>
-          
+
         </fieldset>
         <br />
         <div class="row">
@@ -79,55 +80,56 @@
           </div>
           <div class="col-6 p-1">
             <input type="text" class="form-control" placeholder="Número" required />
-          <div class="invalid-feedback">Proporcione un número de casa</div>
+            <div class="invalid-feedback">Proporcione un número de casa</div>
           </div>
           <div class="col-6 p-1">
             <input type="text" class="form-control" placeholder="Esquina" required />
-          <div class="invalid-feedback">Proporcione una esquina</div>
+            <div class="invalid-feedback">Proporcione una esquina</div>
           </div>
         </div>
-      <hr>
-      <h3>Costos</h3>
-      <ul class="list-group ">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">SubTotal:</div>
-          </div>
-          <span class="badge bg-primary rounded-pill" id="subtotal"></span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Costo del envio:</div>
-          </div>
-          <span class="badge bg-primary rounded-pill" id="costoenvio"></span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Total:</div>
-          </div>
-          <span class="badge bg-primary rounded-pill" id="ptotal"></span>
-        </li>
-      </ul>
-      <hr>
-      <h3>Formas de pago</h3>
-      <p id="formadepago"></p><a id="cambiarforma" class="link-primary btn active" data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop">
-        Seleccionar forma de pago
-      </a>
-      <div id="formaincorrecta" class="invalid-feedback">Seleccione metodo de envío</div>
-      <div id="formaincorrectadato" class="invalid-feedback">Complete adecuadamente los datos</div>
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Formas de Pago</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <hr>
+        <h3>Costos</h3>
+        <ul class="list-group ">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">SubTotal:</div>
             </div>
-            <div class="modal-body">
+            <span class="badge bg-primary rounded-pill" id="subtotal"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Costo del envio:</div>
+            </div>
+            <span class="badge bg-primary rounded-pill" id="costoenvio"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Total:</div>
+            </div>
+            <span class="badge bg-primary rounded-pill" id="ptotal"></span>
+          </li>
+        </ul>
+        <hr>
+        <h3>Formas de pago</h3>
+        <p id="formadepago"></p><a id="cambiarforma" class="link-primary btn active" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">
+          Seleccionar forma de pago
+        </a>
+        <div id="formaincorrecta" class="invalid-feedback">Seleccione metodo de envío</div>
+        <div id="faltadedatos" class="invalid-feedback">Complete adecuadamente los datos</div>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Formas de Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
                 <div class="row g-3">
                   <div>
-                    <input class="tde form-check-input" type="radio" name="fdp" id="tdc" required aria-describedby="formaincorrecta">
+                    <input class="tde form-check-input" type="radio" name="fdp" id="tdc" required
+                      aria-describedby="formaincorrecta">
                     <label class="form-label" for="tdc">Tarjeta de crédito</label>
                     <div class="invalid-feedback">Seleccione método de envío</div>
                     <hr>
@@ -135,16 +137,19 @@
                   <fieldset class="row justify-content-center" id="ptarjeta">
                     <div class="col-6">
                       <label for="ntdc" class="form-label">Número de tarjeta</label>
-                      <input class="form-control " type="text" name="tarjeta" id="ntdc" placeholder="xxxx xxxx xxxx xxxx" required aria-describedby="formaincorrectadato">
+                      <input class="form-control " type="text" name="tarjeta" id="ntdc"
+                        placeholder="xxxx xxxx xxxx xxxx" required aria-describedby="formaincorrectadato">
                       <div class="invalid-feedback">Ingrese número de tarjeta</div>
                       <br>
                       <label for="fvencimiento">Fecha de vencimiento (MM/AA)</label>
-                      <input class="form-control" type="text" name="fechavencimiento" id="fvencimiento" placeholder="mm/aa" required aria-describedby="formaincorrectadato">
-                    <div class="invalid-feedback">Ingrese vencimiento de la tarjeta</div>
+                      <input class="form-control" type="text" name="fechavencimiento" id="fvencimiento"
+                        placeholder="mm/aa" required aria-describedby="formaincorrectadato">
+                      <div class="invalid-feedback">Ingrese vencimiento de la tarjeta</div>
                     </div>
                     <div class="col-6">
                       <label class="form-label" for="codigo">Código de seg.</label>
-                      <input class="form-control" type="text" name="codigo" id="codigo" placeholder="123" required aria-describedby="formaincorrectadato">
+                      <input class="form-control" type="text" name="codigo" id="codigo" placeholder="123" required
+                        aria-describedby="formaincorrectadato">
                       <div class="invalid-feedback">Ingrese código de seguridad</div>
                     </div>
                   </fieldset>
@@ -156,22 +161,27 @@
                   <fieldset id="pbanco">
                     <div class="col-6">
                       <label for="ncuenta" class="form-label">Número de cuenta</label>
-                      <input class="form-control" type="text" name="ncuenta" id="ncuenta" required aria-describedby="formaincorrectadato">
+                      <input class="form-control" type="text" name="ncuenta" id="ncuenta" 
+                        aria-describedby="faltadedatos" required>
                       <div class="invalid-feedback">Ingrese número de cuenta</div>
                     </div>
                   </fieldset>
                 </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <br>
-      <hr>
-      <button class="btn btn-primary w-100" type="submit">Finalizar compra</button>
+        <br>
+        <hr>
+        <button class="btn btn-primary w-100" type="submit">Finalizar compra</button>
       </form>
+      <div id="alertcompra" class="alert alert-success alert-dismissible visually-hidden"   role="alert">
+        ¡Has comprado con exito!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" aria-hidden="true"></button>
+      </div>
     </div>
   </main>
   <footer class="text-muted">

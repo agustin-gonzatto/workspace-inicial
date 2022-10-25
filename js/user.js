@@ -14,6 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function cerrarSesion() {
-  localStorage.removeItem("user");
-  localStorage.removeItem("userIMG");
+  localStorage.clear();
 }
