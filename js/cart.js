@@ -1,22 +1,21 @@
 let user_c = 25801;
 let cost = 1;
 let artCost = [];
-let articles=[];
+let articles = [];
 
 fetch(`https://japceibal.github.io/emercado-api/user_cart/${user_c}.json`)
   .then((response) => response.json())
   .then((data) => {
     let cart = JSON.parse(localStorage.getItem("comprar"));
-    if (cart.articles.find(arr => arr.id === data.articles[0].id)){
-      showCart(cart.articles)
-  }
-    else {
+    if (cart.articles.find((arr) => arr.id === data.articles[0].id)) {
+      showCart(cart.articles);
+    } else {
       cart.articles = data.articles.concat(cart.articles);
-      localStorage.setItem("comprar", JSON.stringify(cart))
-      showCart(cart.articles)
+      localStorage.setItem("comprar", JSON.stringify(cart));
+      showCart(cart.articles);
     }
     articles = cart.articles;
-    
+
     metododepago();
     validar();
   });
@@ -42,7 +41,7 @@ function showCart(data) {
                 <td  scope="row"><img src="${data[i].image}" style="max-width:150px; min-width:100px;"></img></td>
                 <td >${data[i].name}</td>
                 <td >${data[i].currency} ${data[i].unitCost}</td>
-                <td ><input class="cont" type="number" name="number" min="1" value="${data[i].count}"></td>
+                <td ><input class="cont form-control" type="number" name="number" min="1" value="${data[i].count}" required></td>
                 <td class="cost" >${data[i].currency} ${data[i].unitCost * data[i].count}</td>
                 <td><i role="button" id="${data[i].id}" class="fa fa-trash"></i></td>
             </tr>`;
@@ -104,6 +103,8 @@ function metododepago() {
 }
 
 function validar() {
+  let alertdatos = document.getElementById("faltadedatos");
+
   var forms = document.querySelectorAll(".needs-validation");
   Array.prototype.slice.call(forms).forEach(function (form) {
     form.addEventListener(
@@ -112,20 +113,39 @@ function validar() {
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
+          console.log(document.getElementById("ntdc").value ==="" || document.getElementById("fvencimiento").value === "" || document.getElementById("codigo").value === "");
+          if (!document.getElementById("tdc").checked && !document.getElementById("transbank").checked) {
+            alertdatos.classList.remove("visually-hidden");
+            alertdatos.classList.add("text-danger");
+          } else {
+            alertdatos.classList.add("visually-hidden");
+          }
+          if (
+            document.getElementById("tdc").checked &&
+            (document.getElementById("ntdc").value === "" || document.getElementById("fvencimiento").value === "" || document.getElementById("codigo").value === "")
+          ) {
+            alertdatos.classList.remove("visually-hidden");
+            alertdatos.classList.add("text-danger");
+          } else {
+            alertdatos.classList.add("visually-hidden");
+          }
+          if (document.getElementById("transbank").checked && document.getElementById("ncuenta").value === "") {
+            alertdatos.classList.remove("visually-hidden");
+            alertdatos.classList.add("text-danger"); 
+          } else {
+            alertdatos.classList.add("visually-hidden");
+          }
+        } else {
+          event.preventDefault();
+          document.getElementById("alertcompra").classList.remove("visually-hidden");
+          window.setTimeout(() => {
+            document.getElementById("alertcompra").classList.add("visually-hidden");
+          },2500)
         }
-
         form.classList.add("was-validated");
       },
       false
-    )
-    form.addEventListener("submit", (event) => {
-      if (form.checkValidity()) {
-        document.getElementById("alertcompra").classList.remove("visually-hidden");
-        event.preventDefault();
-        event.stopPropagation();
-        }
-      });
-    
+    );
   });
 }
 
@@ -133,12 +153,11 @@ function remover() {
   document.getElementsByTagName("table")[0].addEventListener("click", (e) => {
     if (e.target.localName === "i") {
       artCost = [];
-      articles=articles.filter(art => art.id !== e.target.id);
-      showCart(articles)
+      articles = articles.filter((art) => art.id !== e.target.id);
+      showCart(articles);
       let art = JSON.parse(localStorage.getItem("comprar"));
       art.articles = articles;
       localStorage.setItem("comprar", JSON.stringify(art));
-      
-    } 
-  })
+    }
+  });
 }

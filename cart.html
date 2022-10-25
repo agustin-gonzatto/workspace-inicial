@@ -115,8 +115,7 @@
           data-bs-target="#staticBackdrop">
           Seleccionar forma de pago
         </a>
-        <div id="formaincorrecta" class="invalid-feedback">Seleccione metodo de envío</div>
-        <div id="faltadedatos" class="invalid-feedback">Complete adecuadamente los datos</div>
+        <div id="faltadedatos" class="visually-hidden">Complete adecuadamente los datos de pago</div>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -128,28 +127,32 @@
               <div class="modal-body">
                 <div class="row g-3">
                   <div>
-                    <input class="tde form-check-input" type="radio" name="fdp" id="tdc" required
-                      aria-describedby="formaincorrecta">
-                    <label class="form-label" for="tdc">Tarjeta de crédito</label>
+                    <input class="tde form-check-input" type="radio" name="fdp" id="tdc" required>
+                    <label class="form-label " for="tdc">Tarjeta de crédito</label>
                     <div class="invalid-feedback">Seleccione método de envío</div>
                     <hr>
                   </div>
                   <fieldset class="row justify-content-center" id="ptarjeta">
                     <div class="col-6">
-                      <label for="ntdc" class="form-label">Número de tarjeta</label>
+                      <div>
+                        <label for="ntdc" class="form-label">Número de tarjeta</label>
                       <input class="form-control " type="text" name="tarjeta" id="ntdc"
-                        placeholder="xxxx xxxx xxxx xxxx" required aria-describedby="formaincorrectadato">
+                        placeholder="xxxx xxxx xxxx xxxx" required>
                       <div class="invalid-feedback">Ingrese número de tarjeta</div>
+                      </div>
+                      
                       <br>
-                      <label for="fvencimiento">Fecha de vencimiento (MM/AA)</label>
+                      <div>
+                         <label for="fvencimiento">Fecha de vencimiento (MM/AA)</label>
                       <input class="form-control" type="text" name="fechavencimiento" id="fvencimiento"
-                        placeholder="mm/aa" required aria-describedby="formaincorrectadato">
+                        placeholder="mm/aa" required>
                       <div class="invalid-feedback">Ingrese vencimiento de la tarjeta</div>
+                      </div>
+                     
                     </div>
                     <div class="col-6">
                       <label class="form-label" for="codigo">Código de seg.</label>
-                      <input class="form-control" type="text" name="codigo" id="codigo" placeholder="123" required
-                        aria-describedby="formaincorrectadato">
+                      <input class="form-control" type="text" name="codigo" id="codigo" placeholder="123" required>
                       <div class="invalid-feedback">Ingrese código de seguridad</div>
                     </div>
                   </fieldset>
@@ -161,8 +164,7 @@
                   <fieldset id="pbanco">
                     <div class="col-6">
                       <label for="ncuenta" class="form-label">Número de cuenta</label>
-                      <input class="form-control" type="text" name="ncuenta" id="ncuenta" 
-                        aria-describedby="faltadedatos" required>
+                      <input class="form-control" type="text" name="ncuenta" id="ncuenta"  required>
                       <div class="invalid-feedback">Ingrese número de cuenta</div>
                     </div>
                   </fieldset>
@@ -178,7 +180,7 @@
         <hr>
         <button class="btn btn-primary w-100" type="submit">Finalizar compra</button>
       </form>
-      <div id="alertcompra" class="alert alert-success alert-dismissible visually-hidden"   role="alert">
+      <div id="alertcompra" class="alert alert-success alert-dismissible visually-hidden fade show" data-mdb-delay="3000"  role="alert">
         ¡Has comprado con exito!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" aria-hidden="true"></button>
       </div>
