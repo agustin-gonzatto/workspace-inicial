@@ -29,8 +29,7 @@ nav a {
 }
 
 .jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
+  padding: 13% 0;
   margin-bottom: 0;
   background-color: #53C0FB;
   background: url('../img/cover_back.png');
@@ -39,13 +38,6 @@ nav a {
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
-}
-
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
 }
 
 .jumbotron p:last-child {
