@@ -58,10 +58,45 @@
       </div>
     </nav>
     <main>
-      <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="container text-center">
+        <div class="d-flex mt-5 justify-content-between align-items-center" >
+          <h1>Perfil</h1>
+          <img id="pIMG"  alt="" width="100em" height="100em"> 
         </div>
+        <form action="" class="needs-validation" novalidate>
+          <div class="row mt-5 g-3 ">
+          <div class="col-12 col-sm-6">
+            <label for="pnombre" class="form-label">Nombre*</label>
+            <input id="pnombre" class="form-control" required type="text">
+          </div>
+          <div class="col-12 col-sm-6">
+            <label for="p2nombre" class="form-label">Segundo nombre</label>
+            <input id="p2nombre" class="form-control"  type="text">
+          </div>
+          <div class="col-12 col-sm-6">
+            <label for="papellido" class="form-label">Apellido*</label>
+            <input id="papellido" class="form-control" required type="text">
+          </div>
+          <div class="col-12 col-sm-6">
+            <label for="p2apellido" class="form-label">Segundo apellido</label>
+            <input id="p2apellido" class="form-control"  type="text">
+          </div>
+          <div class="col-12 col-sm-6">
+            <label for="pemail" class="form-label">E-mail*</label>
+            <input id="pemail" class="form-control" required type="text">
+          </div>
+          <div class="col-12 col-sm-6">
+            <label for="pimg" class="form-label">Imagen de perfil</label>
+            <input id="pimg" class="form-control" type="file" accept="image/*">
+          </div>
+          <div class="col-12 col-sm-6">
+            <label for="ptel" class="form-label">Teléfono</label>
+            <input id="ptel" class="form-control"  type="tel">
+          </div>
+          </div>
+          <button class="btn btn-primary mt-5 w-50" type="submit">Enviar datos</button>
+        </form>
+        
       </div>
     </main>
     <footer class="text-muted">

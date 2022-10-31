@@ -67,9 +67,9 @@ function costos(arr) {
 
   //SubTotal
   for (let i = 0; i < arr.length; i++) {
-    subtotal += arr[i];
-    document.getElementById("subtotal").innerHTML = `USD ${subtotal}`;
+    subtotal += arr[i];  
   }
+  document.getElementById("subtotal").innerHTML = `USD ${subtotal}`;
 
   //Envio
   document.querySelectorAll(".envio").forEach((element) => {
@@ -113,7 +113,6 @@ function validar() {
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
-          console.log(document.getElementById("ntdc").value ==="" || document.getElementById("fvencimiento").value === "" || document.getElementById("codigo").value === "");
           if (!document.getElementById("tdc").checked && !document.getElementById("transbank").checked) {
             alertdatos.classList.remove("visually-hidden");
             alertdatos.classList.add("text-danger");
