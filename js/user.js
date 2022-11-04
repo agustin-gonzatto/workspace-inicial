@@ -11,8 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
         ${user}
     `;
   }
+  if (!user) {
+    location.href="index.html"
+  }
 });
 
 function cerrarSesion() {
-  localStorage.clear();
+  localStorage.removeItem("user");
 }

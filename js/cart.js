@@ -22,7 +22,7 @@ fetch(`https://japceibal.github.io/emercado-api/user_cart/${user_c}.json`)
 
 function showCart(data) {
   document.getElementById("cart").innerHTML = `
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col"></th>
@@ -38,10 +38,10 @@ function showCart(data) {
   for (let i = 0; i < data.length; i++) {
     document.getElementById("prods").innerHTML += `
             <tr>
-                <td  scope="row"><img src="${data[i].image}" style="max-width:150px; min-width:100px;"></img></td>
-                <td >${data[i].name}</td>
-                <td >${data[i].currency} ${data[i].unitCost}</td>
-                <td ><input class="cont form-control" type="number" name="number" min="1" value="${data[i].count}" required></td>
+                <td  scope="row"><img src="${data[i].image}" style="max-width:150px;width:100%;"></img></td>
+                <td>${data[i].name}</td>
+                <td>${data[i].currency} ${data[i].unitCost}</td>
+                <td><input class="cont form-control" type="number" name="number" min="1" value="${data[i].count}" required></td>
                 <td class="cost" >${data[i].currency} ${data[i].unitCost * data[i].count}</td>
                 <td><i role="button" id="${data[i].id}" class="fa fa-trash"></i></td>
             </tr>`;
