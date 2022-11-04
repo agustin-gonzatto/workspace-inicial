@@ -37,14 +37,19 @@ var forms = document.querySelectorAll('.needs-validation')
 
 function completar(){
   let user = JSON.parse(localStorage.getItem("User"));
-  nombre.value=`${user.nombre}`;
-  nombre2.value=`${user.nombre2}`;
-  apellido.value=`${user.apellido}`;
-  apellido2.value=`${user.apellido2}`;
-  tel.value=`${user.tel}`;
-  email.value=`${user.email}`;
-  user.img!=""?pIMG.src = user.img : pIMG.src = "./img/img_perfil.png";
+  console.log(user.email===localStorage.getItem("user"))
+  if (user.email===localStorage.getItem("user")) {
+    
+    nombre.value=`${user.nombre}`;
+    nombre2.value=`${user.nombre2}`;
+    apellido.value=`${user.apellido}`;
+    apellido2.value=`${user.apellido2}`;
+    tel.value=`${user.tel}`;
+    email.value=`${user.email}`;
+    user.img!=""?pIMG.src = user.img : pIMG.src = "./img/img_perfil.png";
+  }
 }
+  
 
 function guardarP(){
     let img = document.getElementById("pimg");
