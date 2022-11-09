@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("User")) {
     completar();
     validarP();
+    console.log("A")
   } else {
     pIMG.src = "./img/img_perfil.png";
     validarP();
@@ -36,6 +37,7 @@ function validarP() {
 }
 
 function completar() {
+  email.value = localStorage.getItem("user");
   let user = JSON.parse(localStorage.getItem("User"));
   console.log(user.email === localStorage.getItem("user"));
   if (user.email === localStorage.getItem("user")) {
@@ -45,14 +47,14 @@ function completar() {
     apellido2.value = `${user.apellido2}`;
     tel.value = `${user.tel}`;
     email.value = `${user.email}`;
-    user.img != ""
-      ? (pIMG.src = user.img)
-      : (pIMG.src = "./img/img_perfil.png");
+    user.img != "" ? (pIMG.src = user.img) : (pIMG.src = "./img/img_perfil.png");
   }
 }
 
 function guardarP() {
   let img = document.getElementById("pimg");
+  console.log(img.files.length)
+  if (img.files.length > 0){
   var reader = new FileReader();
   reader.readAsDataURL(img.files[0]);
   reader.onload = function () {
@@ -66,5 +68,17 @@ function guardarP() {
       tel: tel.value,
     };
     localStorage.setItem("User", JSON.stringify(user));
-  };
+  };    
+  }else{
+    let user = {
+      nombre: nombre.value,
+      nombre2: nombre2.value,
+      apellido: apellido.value,
+      apellido2: apellido2.value,
+      email: email.value,
+      img: "",
+      tel: tel.value,
+    };
+    localStorage.setItem("User", JSON.stringify(user));
+  }
 }

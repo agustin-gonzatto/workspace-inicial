@@ -1,20 +1,24 @@
-document.getElementById("btn").addEventListener("click", () => {
-  let comprar = {
-    user: document.getElementById("floatingInput").value,
-    articles: [],
-  };
-  localStorage.setItem("comprar", JSON.stringify(comprar));
-  if (
-    document.getElementById("floatingPassword").value.length > 0 &&
-    document.getElementById("floatingInput").value.length > 0
-  ) {
-    localStorage.setItem("user", document.getElementById("floatingInput").value);
+var forms = document.querySelectorAll('.needs-validation')
+Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }else{
+        event.preventDefault()
+        let comprar = {
+          user: document.getElementById("floatingInput").value,
+          articles: [],
+        };
+        localStorage.setItem("comprar", JSON.stringify(comprar));
+        localStorage.setItem("user", document.getElementById("floatingInput").value);
+        window.location.replace("principal.html");
+      }
+      form.classList.add('was-validated')
+    }, false)
+  })
 
-    window.location.replace("principal.html");
-  } else {
-    alert("Debe ingresar los datos correctamente.");
-  }
-});
 
 // Inicio con google
 var firebaseConfig = {

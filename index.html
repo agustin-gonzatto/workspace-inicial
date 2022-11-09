@@ -18,25 +18,27 @@
   <body>
     <main class="mt-5">
       <div class="container session">
+        <form class="needs-validation" novalidate>
         <img class="mb-4" src="img/login.png" alt="" width="40%" height="40%" />
         <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
         <br />
         <p>Email</p>
         <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" width="20%" />
-          <label for="floatingInput">Email</label>
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" width="20%" required/>
+          <label class="form-label" for="floatingInput">Email</label>
         </div>
         <br />
         <br />
         <p>Contraseña</p>
         <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" width="20%" />
-          <label for="floatingPassword">Contraseña</label>
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" width="20%" required/>
+          <label class="form-label" for="floatingPassword">Contraseña</label>
         </div>
         <br />
         <br />
         <button id="btn" class="btn btn-lg btn-primary" type="submit">Ingresar</button>
-        <button onclick="loginWithGoogle()" class="btn btn-lg btn-primary" type="submit">Ingresar con Google</button>
+        <button onclick="loginWithGoogle()" class="btn btn-lg btn-primary" type="submit">Ingresar con Google</button>          
+        </form>
       </div>
     </main>
     <footer class="text-muted">
