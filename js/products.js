@@ -1,4 +1,3 @@
-let url = "https://japceibal.github.io/emercado-api/cats_products/";
 const DOWN = "down";
 const UP = "up";
 const RATING = "rating";
@@ -6,7 +5,7 @@ let minCost = undefined;
 let maxCost = undefined;
 let productos = document.getElementsByClassName("list-group-item");
 
-fetch(url.concat(localStorage.getItem("catID")) + ".json")
+fetch(PRODUCTS_URL.concat(localStorage.getItem("catID")) + ".json")
   .then((res) => res.json())
   .then((data) => {
     console.log(data);
@@ -59,7 +58,9 @@ fetch(url.concat(localStorage.getItem("catID")) + ".json")
         for (let i = 0; i < data.products.length; i++) {
           const element = data.products[i];
           var products = data.products.filter(
-            (element) => element.name.toLowerCase().includes(e.target.value.toLowerCase()) | element.description.toLowerCase().includes(e.target.value.toLowerCase())
+            (element) =>
+              element.name.toLowerCase().includes(e.target.value.toLowerCase()) |
+              element.description.toLowerCase().includes(e.target.value.toLowerCase())
           );
         }
         showPage(products);
@@ -78,7 +79,10 @@ fetch(url.concat(localStorage.getItem("catID")) + ".json")
 function showPage(data) {
   document.getElementById("product-c").innerHTML = "";
   for (let i = 0; i < data.length; i++) {
-    if ((minCost == undefined || (minCost != undefined && parseInt(data[i].cost) >= minCost)) && (maxCost == undefined || (maxCost != undefined && parseInt(data[i].cost) <= maxCost))) {
+    if (
+      (minCost == undefined || (minCost != undefined && parseInt(data[i].cost) >= minCost)) &&
+      (maxCost == undefined || (maxCost != undefined && parseInt(data[i].cost) <= maxCost))
+    ) {
       document.getElementById("product-c").innerHTML += `
         <div class="list-group-item list-group-item-action cursor-active ">
             <div class="row">

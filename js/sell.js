@@ -17,7 +17,8 @@ function updateTotalCosts() {
 
   let unitCostToShow = MONEY_SYMBOL + productCost;
   let comissionToShow = Math.round(comissionPercentage * 100) + PERCENTAGE_SYMBOL;
-  let totalCostToShow = MONEY_SYMBOL + (Math.round(productCost * comissionPercentage * 100) / 100 + parseInt(productCost));
+  let totalCostToShow =
+    MONEY_SYMBOL + (Math.round(productCost * comissionPercentage * 100) / 100 + parseInt(productCost));
 
   unitProductCostHTML.innerHTML = unitCostToShow;
   comissionCostHTML.innerHTML = comissionToShow;

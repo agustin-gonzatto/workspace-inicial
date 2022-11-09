@@ -3,7 +3,7 @@ let cost = 1;
 let artCost = [];
 let articles = [];
 
-fetch(`https://japceibal.github.io/emercado-api/user_cart/${user_c}.json`)
+fetch(`${CART_INFO_URL}${user_c}.json`)
   .then((response) => response.json())
   .then((data) => {
     let cart = JSON.parse(localStorage.getItem("comprar"));
@@ -41,7 +41,9 @@ function showCart(data) {
                 <td  scope="row"><img src="${data[i].image}" style="max-width:150px;width:100%;"></img></td>
                 <td>${data[i].name}</td>
                 <td>${data[i].currency} ${data[i].unitCost}</td>
-                <td><input class="cont form-control" type="number" name="number" min="1" value="${data[i].count}" required></td>
+                <td><input class="cont form-control" type="number" name="number" min="1" value="${
+                  data[i].count
+                }" required></td>
                 <td class="cost" >${data[i].currency} ${data[i].unitCost * data[i].count}</td>
                 <td><i role="button" id="${data[i].id}" class="fa fa-trash"></i></td>
             </tr>`;
@@ -51,7 +53,9 @@ function showCart(data) {
 
   for (let i = 0; i < document.getElementsByClassName("cont").length; i++) {
     document.getElementsByClassName("cont")[i].addEventListener("click", () => {
-      document.getElementsByClassName("cost")[i].innerHTML = `${data[i].currency} ${data[i].unitCost * document.getElementsByClassName("cont")[i].value} `;
+      document.getElementsByClassName("cost")[i].innerHTML = `${data[i].currency} ${
+        data[i].unitCost * document.getElementsByClassName("cont")[i].value
+      } `;
       costos(artCost);
     });
   }
@@ -67,7 +71,7 @@ function costos(arr) {
 
   //SubTotal
   for (let i = 0; i < arr.length; i++) {
-    subtotal += arr[i];  
+    subtotal += arr[i];
   }
   document.getElementById("subtotal").innerHTML = `USD ${subtotal}`;
 
@@ -121,7 +125,9 @@ function validar() {
           }
           if (
             document.getElementById("tdc").checked &&
-            (document.getElementById("ntdc").value === "" || document.getElementById("fvencimiento").value === "" || document.getElementById("codigo").value === "")
+            (document.getElementById("ntdc").value === "" ||
+              document.getElementById("fvencimiento").value === "" ||
+              document.getElementById("codigo").value === "")
           ) {
             alertdatos.classList.remove("visually-hidden");
             alertdatos.classList.add("text-danger");
@@ -130,7 +136,7 @@ function validar() {
           }
           if (document.getElementById("transbank").checked && document.getElementById("ncuenta").value === "") {
             alertdatos.classList.remove("visually-hidden");
-            alertdatos.classList.add("text-danger"); 
+            alertdatos.classList.add("text-danger");
           } else {
             alertdatos.classList.add("visually-hidden");
           }
@@ -139,7 +145,7 @@ function validar() {
           document.getElementById("alertcompra").classList.remove("visually-hidden");
           window.setTimeout(() => {
             document.getElementById("alertcompra").classList.add("visually-hidden");
-          },2500)
+          }, 2500);
         }
         form.classList.add("was-validated");
       },

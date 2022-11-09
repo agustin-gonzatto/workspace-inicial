@@ -1,4 +1,3 @@
-let url = "https://japceibal.github.io/emercado-api/products/";
 let id = localStorage.getItem("id");
 let producto = {};
 let comentario = [];
@@ -72,10 +71,10 @@ function showComments(data) {
 
 //Solicito los Json del producto y comentarios, los muestro y agrego escuchas.
 
-fetch(url.concat(localStorage.getItem("id")) + ".json")
+fetch(PRODUCT_INFO_URL.concat(localStorage.getItem("id")) + ".json")
   .then((res) => res.json())
   .then((data1) => {
-    fetch(`https://japceibal.github.io/emercado-api/products_comments/${id}.json`)
+    fetch(`${PRODUCT_INFO_COMMENTS_URL}${id}.json`)
       .then((res) => res.json())
       .then((data) => {
         showPageProduct(data1);
@@ -94,7 +93,8 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
           if (i > 1) {
             document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[i - 2].src;
           } else {
-            document.getElementById("bigIMG").src = document.getElementsByClassName("smallIMG")[data1.images.length - 1].src;
+            document.getElementById("bigIMG").src =
+              document.getElementsByClassName("smallIMG")[data1.images.length - 1].src;
           }
         });
         document.getElementsByClassName("carousel-control-next")[0].addEventListener("click", () => {
@@ -124,7 +124,10 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
 
         //Al presionar enviar
         document.getElementById("commentBtn").addEventListener("click", () => {
-          if (document.getElementsByClassName("comment checked").length == 0 || document.getElementById("comment").value == "") {
+          if (
+            document.getElementsByClassName("comment checked").length == 0 ||
+            document.getElementById("comment").value == ""
+          ) {
             alert("Comentario incompleto");
           } else {
             let score = document.getElementsByClassName("comment checked").length;
@@ -170,19 +173,23 @@ fetch(url.concat(localStorage.getItem("id")) + ".json")
 
         //Comprar
         document.getElementById("comprar").addEventListener("click", () => {
-          if (JSON.parse(localStorage.getItem("comprar")).articles.find(element => element.id == localStorage.getItem("id"))==null) {
+          if (
+            JSON.parse(localStorage.getItem("comprar")).articles.find(
+              (element) => element.id == localStorage.getItem("id")
+            ) == null
+          ) {
             let comprar = JSON.parse(localStorage.getItem("comprar"));
-          comprar.articles.push({
-            id: localStorage.getItem("id"),
-            name: data1.name,
-            count: 1,
-            unitCost: data1.cost,
-            currency: data1.currency,
-            image: data1.images[0],
-          });
+            comprar.articles.push({
+              id: localStorage.getItem("id"),
+              name: data1.name,
+              count: 1,
+              unitCost: data1.cost,
+              currency: data1.currency,
+              image: data1.images[0],
+            });
             localStorage.setItem("comprar", JSON.stringify(comprar));
           } else {
-            alert("Ya ingreso este producto al carrito")
+            alert("Ya ingreso este producto al carrito");
           }
         });
       });

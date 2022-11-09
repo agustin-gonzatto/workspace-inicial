@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
   if (!user) {
-    location.href="index.html"
+    location.href = "index.html";
   }
 });
 

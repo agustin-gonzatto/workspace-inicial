@@ -4,7 +4,10 @@ document.getElementById("btn").addEventListener("click", () => {
     articles: [],
   };
   localStorage.setItem("comprar", JSON.stringify(comprar));
-  if (document.getElementById("floatingPassword").value.length > 0 && document.getElementById("floatingInput").value.length > 0) {
+  if (
+    document.getElementById("floatingPassword").value.length > 0 &&
+    document.getElementById("floatingInput").value.length > 0
+  ) {
     localStorage.setItem("user", document.getElementById("floatingInput").value);
 
     window.location.replace("principal.html");
