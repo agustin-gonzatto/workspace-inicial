@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("User")) {
     completar();
     validarP();
-    console.log("A")
   } else {
     pIMG.src = "./img/img_perfil.png";
+    email.value = localStorage.getItem("user")
     validarP();
   }
 });
